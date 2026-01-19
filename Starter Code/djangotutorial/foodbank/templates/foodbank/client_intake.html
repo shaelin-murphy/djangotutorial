@@ -1,0 +1,130 @@
+{% extends 'foodbank/base.html' %}
+
+{% block title %}New Client Intake - Food Bank Management{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2 style="margin-bottom: 1.5rem;">New Client Intake Form</h2>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        <h3 style="margin: 2rem 0 1rem 0; color: #063c2a; border-bottom: 2px solid rgba(6, 60, 42, 0.2); padding-bottom: 0.5rem;">Personal Information</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+            <div class="form-group">
+                {{ form.first_name.label_tag }}
+                {{ form.first_name }}
+                {% if form.first_name.errors %}
+                <div style="color: #e53e3e; font-size: 0.875rem; margin-top: 0.25rem;">{{ form.first_name.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.last_name.label_tag }}
+                {{ form.last_name }}
+                {% if form.last_name.errors %}
+                <div style="color: #e53e3e; font-size: 0.875rem; margin-top: 0.25rem;">{{ form.last_name.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.date_of_birth.label_tag }}
+                {{ form.date_of_birth }}
+                {% if form.date_of_birth.errors %}
+                <div style="color: #e53e3e; font-size: 0.875rem; margin-top: 0.25rem;">{{ form.date_of_birth.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.phone.label_tag }}
+                {{ form.phone }}
+                {% if form.phone.errors %}
+                <div style="color: #e53e3e; font-size: 0.875rem; margin-top: 0.25rem;">{{ form.phone.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.email.label_tag }}
+                {{ form.email }}
+                {% if form.email.errors %}
+                <div style="color: #e53e3e; font-size: 0.875rem; margin-top: 0.25rem;">{{ form.email.errors }}</div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <h3 style="margin: 2rem 0 1rem 0; color: #063c2a; border-bottom: 2px solid rgba(6, 60, 42, 0.2); padding-bottom: 0.5rem;">Address Information</h3>
+        <div class="form-group">
+            {{ form.street_address.label_tag }}
+            {{ form.street_address }}
+            {% if form.street_address.errors %}
+            <div style="color: #e53e3e; font-size: 0.875rem; margin-top: 0.25rem;">{{ form.street_address.errors }}</div>
+            {% endif %}
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+            <div class="form-group">
+                {{ form.city.label_tag }}
+                {{ form.city }}
+                {% if form.city.errors %}
+                <div style="color: #e53e3e; font-size: 0.875rem; margin-top: 0.25rem;">{{ form.city.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.state.label_tag }}
+                {{ form.state }}
+                {% if form.state.errors %}
+                <div style="color: #e53e3e; font-size: 0.875rem; margin-top: 0.25rem;">{{ form.state.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.zip_code.label_tag }}
+                {{ form.zip_code }}
+                {% if form.zip_code.errors %}
+                <div style="color: #e53e3e; font-size: 0.875rem; margin-top: 0.25rem;">{{ form.zip_code.errors }}</div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <h3 style="margin: 2rem 0 1rem 0; color: #063c2a; border-bottom: 2px solid rgba(6, 60, 42, 0.2); padding-bottom: 0.5rem;">Household & Eligibility Information</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+            <div class="form-group">
+                {{ form.household_size.label_tag }}
+                {{ form.household_size }}
+                {% if form.household_size.errors %}
+                <div style="color: #e53e3e; font-size: 0.875rem; margin-top: 0.25rem;">{{ form.household_size.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.monthly_income.label_tag }}
+                {{ form.monthly_income }}
+                {% if form.monthly_income.errors %}
+                <div style="color: #e53e3e; font-size: 0.875rem; margin-top: 0.25rem;">{{ form.monthly_income.errors }}</div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <h3 style="margin: 2rem 0 1rem 0; color: #063c2a; border-bottom: 2px solid rgba(6, 60, 42, 0.2); padding-bottom: 0.5rem;">Additional Information</h3>
+        <div class="form-group">
+            {{ form.intake_staff.label_tag }}
+            {{ form.intake_staff }}
+            {% if form.intake_staff.errors %}
+            <div style="color: #e53e3e; font-size: 0.875rem; margin-top: 0.25rem;">{{ form.intake_staff.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.eligibility_notes.label_tag }}
+            {{ form.eligibility_notes }}
+            {% if form.eligibility_notes.errors %}
+            <div style="color: #e53e3e; font-size: 0.875rem; margin-top: 0.25rem;">{{ form.eligibility_notes.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.special_notes.label_tag }}
+            {{ form.special_notes }}
+            {% if form.special_notes.errors %}
+            <div style="color: #e53e3e; font-size: 0.875rem; margin-top: 0.25rem;">{{ form.special_notes.errors }}</div>
+            {% endif %}
+        </div>
+        
+        <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+            <button type="submit" class="btn btn-success">Submit Intake</button>
+            <a href="{% url 'foodbank:client_list' %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

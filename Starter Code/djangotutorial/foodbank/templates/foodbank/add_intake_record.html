@@ -1,0 +1,51 @@
+{% extends 'foodbank/base.html' %}
+
+{% block title %}Add Visit - {{ client.first_name }} {{ client.last_name }}{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2 style="margin-bottom: 1rem;">Add Visit Record for {{ client.first_name }} {{ client.last_name }}</h2>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+            <div class="form-group">
+                {{ form.visit_date.label_tag }}
+                {{ form.visit_date }}
+                {% if form.visit_date.errors %}
+                <div style="color: #e53e3e; font-size: 0.875rem; margin-top: 0.25rem;">{{ form.visit_date.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.staff_member.label_tag }}
+                {{ form.staff_member }}
+                {% if form.staff_member.errors %}
+                <div style="color: #e53e3e; font-size: 0.875rem; margin-top: 0.25rem;">{{ form.staff_member.errors }}</div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="form-group">
+            {{ form.items_received.label_tag }}
+            {{ form.items_received }}
+            {% if form.items_received.errors %}
+            <div style="color: #e53e3e; font-size: 0.875rem; margin-top: 0.25rem;">{{ form.items_received.errors }}</div>
+            {% endif %}
+        </div>
+        
+        <div class="form-group">
+            {{ form.notes.label_tag }}
+            {{ form.notes }}
+            {% if form.notes.errors %}
+            <div style="color: #e53e3e; font-size: 0.875rem; margin-top: 0.25rem;">{{ form.notes.errors }}</div>
+            {% endif %}
+        </div>
+        
+        <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+            <button type="submit" class="btn btn-success">Save Visit Record</button>
+            <a href="{% url 'foodbank:client_detail' client.id %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

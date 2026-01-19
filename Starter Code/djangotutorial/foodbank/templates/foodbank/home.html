@@ -1,0 +1,66 @@
+{% extends 'foodbank/base.html' %}
+
+{% block title %}Home - Food Bank Management{% endblock %}
+
+{% block content %}
+<div class="stats">
+    <div class="stat-card">
+        <h3>{{ total_clients }}</h3>
+        <p>Total Clients</p>
+    </div>
+    <div class="stat-card">
+        <h3>{{ eligible_clients }}</h3>
+        <p>Eligible Clients</p>
+    </div>
+    <div class="stat-card">
+        <h3>{{ pending_clients }}</h3>
+        <p>Pending Review</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2 style="margin-bottom: 1rem;">Quick Actions</h2>
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="{% url 'foodbank:client_intake' %}" class="btn">New Client Intake</a>
+        <a href="{% url 'foodbank:client_list' %}" class="btn btn-secondary">View All Clients</a>
+    </div>
+</div>
+
+<div class="card">
+    <h2 style="margin-bottom: 1rem;">Recent Clients</h2>
+    {% if recent_clients %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>City</th>
+                <th>Household Size</th>
+                <th>Eligibility</th>
+                <th>Intake Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for client in recent_clients %}
+            <tr>
+                <td>{{ client.first_name }} {{ client.last_name }}</td>
+                <td>{{ client.city }}</td>
+                <td>{{ client.household_size }}</td>
+                <td>
+                    <span class="badge badge-{{ client.eligibility_status }}">
+                        {{ client.get_eligibility_status_display }}
+                    </span>
+                </td>
+                <td>{{ client.intake_date|date:"M d, Y" }}</td>
+                <td>
+                    <a href="{% url 'foodbank:client_detail' client.id %}" class="btn" style="padding: 0.5rem 1rem; font-size: 0.875rem;">View</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No clients registered yet. <a href="{% url 'foodbank:client_intake' %}">Start with a new intake</a>.</p>
+    {% endif %}
+</div>
+{% endblock %}
